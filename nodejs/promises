@@ -1,0 +1,9 @@
+## Ciclo de vida das promises
+
+    Pending: Estado inicial, ainda não terminou ou ainda não foi rejeitado
+
+    Fulfiled: Quando executou todas as operações com sucesso
+
+    Rejected: quando a operação falhou
+
+
