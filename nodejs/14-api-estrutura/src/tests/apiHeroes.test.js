@@ -72,18 +72,16 @@ describe('Suite de testes API heroes', function () {
     })
     
     it('listar /herois - filtrar um item', async () => {
-        const TAMANHO_LIMITE = 10
-        const NAME = 'Homen Aranha-1584825501567'
         const result = await app.inject({
             method: 'GET',
-            url: `/herois?skip=0&limit=${TAMANHO_LIMITE}&nome=${NAME}`
+            url: `/herois?skip=0&limit=10&nome=${MOCK_HEROI_INICIAL.nome}`
         })
 
         const statusCode = result.statusCode
         const dados = JSON.parse(result.payload)
 
         assert.deepEqual(statusCode, 200)
-        assert.deepEqual(dados[0].nome, NAME)
+        assert.deepEqual(dados[0].nome, MOCK_HEROI_INICIAL.nome)
     })
 
     it('cadastrar POST - /herois', async () => {
@@ -124,7 +122,6 @@ describe('Suite de testes API heroes', function () {
             url: `/herois/${_id}`,
             payload: JSON.stringify({ poder: 'Guitarrista' })
         })
-        console.log('result', result)
         const statusCode = result.statusCode
         const dados = JSON.parse(result.payload)
 
