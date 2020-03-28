@@ -3,6 +3,22 @@
 // npm i hapi-auth-jwt2
 // npm i bcrypt
 
+// External dependencies
+const { config } = require('dotenv')
+const { join } = require('path')
+const { ok } = require('assert')
+
+const env = process.env.NODE_ENV || 'dev'
+ok(env === 'prod' || env === 'dev', 'Ambiente invalido!')
+
+const configPath = join(__dirname, './config', `.env.${env}`)
+config({ path: configPath })
+
+const Hapi = require('hapi')
+const HapiSwagger = require('hapi-swagger')
+const Vision = require('vision')
+const Inert = require('inert')
+const HapiJwt = require('hapi-auth-jwt2')
 // Project dependencies
 const Context = require('./db/stratagies/base/contextStrategy')
 const MongoDb = require('./db/stratagies/mongodb/mongodb')
@@ -11,12 +27,6 @@ const Postgres = require('./db/stratagies/postgres/postgres')
 const UsuarioSchema = require('./db/stratagies/postgres/schemas/usuarioSchema')
 const HeroRoute = require('./routes/heroRoutes')
 const AuthRoute = require('./routes/authRoutes')
-// External dependencies
-const Hapi = require('hapi')
-const HapiSwagger = require('hapi-swagger')
-const Vision = require('vision')
-const Inert = require('inert')
-const HapiJwt = require('hapi-auth-jwt2')
 
 const JWT_SECRET = process.env.JWT_KEY
 

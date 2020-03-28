@@ -24,7 +24,7 @@ const STATUS = {
     }
 
     static connect() {
-        Mongoose.connect('mongodb://victorbarreiros:root@localhost:27017/herois', { 
+        Mongoose.connect(process.env.MONGODB_URL, { 
             useNewUrlParser: true 
         }, function (error) {
             if(!error) return;
